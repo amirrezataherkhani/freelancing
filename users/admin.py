@@ -3,20 +3,11 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from .models import User, Profile
 
-# from .forms import CustomUserCreationForm, CustomUserChangeForm
+
+# ordering is commented on UserAdmin
+class CustomUserAdmin(UserAdmin):
+    list_display = ("email", "is_active", "is_staff")
 
 
-# class CustomUserAdmin(UserAdmin):
-#     form = CustomUserChangeForm
-#     add_form = CustomUserCreationForm
-    # add_fieldsets = (
-    #     ('User Creation Form', {
-    #         'classes': ('wide',),
-    #         'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
-    #      ),
-    # )
-    # list_display = ("email",)
-
-
-admin.site.register(get_user_model())
-# admin.site.register(Profile)
+admin.site.register(get_user_model(), CustomUserAdmin)
+admin.site.register(Profile)
